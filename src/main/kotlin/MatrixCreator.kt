@@ -66,6 +66,16 @@ abstract class MatrixCreator {
             return B
         }
 
+        fun transpose(A: D2DoubleMatrix): D2DoubleMatrix {
+            val B = zero(A.shape().second, A.shape().first)
+            for (i in 0 until A.shape().first) {
+                for (j in 0 until A.shape().second) {
+                    B.setAt(j, i, A.numberAt(i, j))
+                }
+            }
+            return B
+        }
+
         /**
          * reshapes flat array to given shape
          * rows * columns == arr.size must holds.

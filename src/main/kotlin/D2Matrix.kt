@@ -33,11 +33,18 @@ class D2DoubleMatrix(private val rowNumber: Int, private val columnNumber: Int) 
         return MatrixCreator.fromFlatArray(shape().first, shape().second, entryTo)
     }
 
-    fun plus(to: D2DoubleMatrix) = binaryPointwiseOperator(to, {a, b -> a + b})
-    fun minus(to: D2DoubleMatrix) = binaryPointwiseOperator(to, {a, b -> a - b})
+    operator fun plus(to: D2DoubleMatrix) = binaryPointwiseOperator(to, { a, b -> a + b})
+    operator fun minus(to: D2DoubleMatrix) = binaryPointwiseOperator(to, {a, b -> a - b})
+    operator fun times(to: Double): D2DoubleMatrix {
+        val entryThis = getEntryArray()
+        for (i in entryThis.indices) {
+            entryThis[i] *= to
+        }
+        return MatrixCreator.fromFlatArray(shape().first, shape().second, entryThis)
+    }
 
-    fun multiplyTo(to : D2DoubleMatrix) : D2DoubleMatrix{
-        val multiplier: multiplyStrategy = DummyMultiplier()
+    operator fun times(to : D2DoubleMatrix) : D2DoubleMatrix{
+        val multiplier: multiplyStrategy = Strassen()
         return multiplier.multiply(this, to)
     }
 
