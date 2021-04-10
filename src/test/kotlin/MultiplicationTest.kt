@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 
-internal class D2DoubleMatrixTest {
+internal class MultiplicationTest {
 
     @org.junit.jupiter.api.Test
     fun multiplyToTestRowToColumn() {
@@ -22,11 +22,24 @@ internal class D2DoubleMatrixTest {
 
         //val startTime = System.currentTimeMillis();
 
-        val A = MatrixCreator.randomElementUniformMatrix(1000, 1000, 0.0, 1.0)
+        val A = MatrixCreator.randomElementUniformMatrix(2000, 2000, 0.0, 1.0)
 
         //val middleTime = System.currentTimeMillis()
         //println((middleTime - startTime) / 1000.0)
         assertNotEquals(A.multiplyTo(A), A)
+
+    }
+
+    @org.junit.jupiter.api.Test
+    fun strassenMultiplyToTestLargeSquareRandomMatrixSquared() {
+
+        //val startTime = System.currentTimeMillis();
+
+        val A = MatrixCreator.randomElementUniformMatrix(2000, 2000, 0.0, 1.0)
+
+        //val middleTime = System.currentTimeMillis()
+        //println((middleTime - startTime) / 1000.0)
+        assertNotEquals(Strassen().multiply(A, A), A)
 
     }
 

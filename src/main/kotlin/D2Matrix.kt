@@ -1,4 +1,4 @@
-
+import java.util.function.BiFunction
 
 class D2DoubleMatrix(private val rowNumber: Int, private val columnNumber: Int) {
     private var entryArray = DoubleArray(rowNumber * columnNumber)
@@ -22,6 +22,19 @@ class D2DoubleMatrix(private val rowNumber: Int, private val columnNumber: Int) 
         assert(columnPos in 0 until columnNumber)
         entryArray[rowPos * columnNumber + columnPos] = value
     }
+
+    fun binaryPointwiseOperator(to: D2DoubleMatrix, op: BiFunction<Double, Double, Double>): D2DoubleMatrix {
+        assert(to.shape() == this.shape())
+        val entryTo = to.getEntryArray()
+        val entryThis = getEntryArray()
+        for (i in entryTo.indices) {
+            entryTo[i] = op.apply(entryThis[i], entryTo[i])
+        }
+        return MatrixCreator.fromFlatArray(shape().first, shape().second, entryTo)
+    }
+
+    fun plus(to: D2DoubleMatrix) = binaryPointwiseOperator(to, {a, b -> a + b})
+    fun minus(to: D2DoubleMatrix) = binaryPointwiseOperator(to, {a, b -> a - b})
 
     fun multiplyTo(to : D2DoubleMatrix) : D2DoubleMatrix{
         val multiplier: multiplyStrategy = DummyMultiplier()

@@ -1,16 +1,15 @@
+import multiplyStrategy.Companion.isCompatibleShapes
+
 class DummyMultiplier : multiplyStrategy {
 
     private companion object {
-        fun isCompatibleShapes(first: Pair<Int, Int>, second: Pair<Int, Int>): Boolean {
-            return first.second == second.first
-        }
 
         fun pairIndexToFlatIndex(row: Int, column: Int, shape: Pair<Int, Int>) : Int {
             return row * shape.second + column
         }
     }
 
-    override public fun multiply(L: D2DoubleMatrix, R: D2DoubleMatrix): D2DoubleMatrix {
+    override fun multiply(L: D2DoubleMatrix, R: D2DoubleMatrix): D2DoubleMatrix {
         if (!isCompatibleShapes(L.shape(), R.shape())) {
             throw IllegalArgumentException()
         }
