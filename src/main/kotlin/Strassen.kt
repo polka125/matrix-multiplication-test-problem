@@ -5,10 +5,10 @@ class Strassen : multiplyStrategy {
     companion object {
         // if one of dimension is smaller then threshold, we switch to dummyMultilier
         // value of threshold is empirical and can be changed without damage
-        private val strassenThreshold = 250
+        private val strassenThreshold = 150
 
 
-        private val defaultMultiplier: multiplyStrategy = SmallMatrixMultiplier()
+        private val defaultMultiplier: multiplyStrategy = DummyCacheFriendly()
         /**
          * fit matrix into minimal matrix that has both even dimension
          * if matrix already has even dimensions, return it unchanged
