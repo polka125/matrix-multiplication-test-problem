@@ -17,15 +17,15 @@ class DummyCacheFriendly : multiplyStrategy {
      * @return result of multiplication
      */
     override fun multiply(L: D2DoubleMatrix, R: D2DoubleMatrix): D2DoubleMatrix {
-        val entryL = L.getEntryArray()
-        val entryRTansposed = MatrixCreator.transpose(R).getEntryArray()
+        val RTansposed = MatrixCreator.transpose(R)
         val result = MatrixCreator.zero(L.shape().first, R.shape().second)
         for (i in 0 until result.shape().first) {
             for (j in 0 until result.shape().second) {
                 var aij = 0.0
                 for (k in 0 until L.shape().second) {
-                    aij += entryL[pairIndexToFlatIndex(i, k, L.shape())] *
-                            entryRTansposed[pairIndexToFlatIndex(j, k, Pair(R.shape().second, R.shape().first))]
+                    aij += L.numberAt(i, k) * RTansposed.numberAt(j, k)
+//                    aij += entryL[pairIndexToFlatIndex(i, k, L.shape())] *
+//                            entryRTansposed[pairIndexToFlatIndex(j, k, Pair(R.shape().second, R.shape().first))]
                 }
                 result.setAt(i, j, aij)
             }

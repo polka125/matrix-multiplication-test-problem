@@ -5,21 +5,21 @@ internal class MultiplicationTest {
         lateinit var m1_1026_1026: D2DoubleMatrix
         lateinit var m2_1026_1026: D2DoubleMatrix
 
-        var m1_100_100000: D2DoubleMatrix 
-        var m2_100000_100: D2DoubleMatrix
-        var m1_100_100000_x_m2_100000_100: D2DoubleMatrix
+        lateinit var m1_100_100000: D2DoubleMatrix
+        lateinit var m2_100000_100: D2DoubleMatrix
+        lateinit var m1_100_100000_x_m2_100000_100: D2DoubleMatrix
 
         init {
-            m1_1026_1026 = MatrixCreator.randomElementUniformMatrix(1026, 1026, -1.0, 1.0)
-            m2_1026_1026 = MatrixCreator.randomElementUniformMatrix(1026, 1026, -1.0, 1.0)
+            m1_1026_1026 = MatrixCreator.randomElementUniformMatrix(2026, 2026, -1.0, 1.0)
+            m2_1026_1026 = MatrixCreator.randomElementUniformMatrix(2026, 2026, -1.0, 1.0)
             //Yes, It's not very good that for instancing tests we use complicated Strassen algorithm
             //On the other hand, there is a test that shows that result of Strassen().multiply
             //equal to dummy multiply
             m1_1026_1026_x_m2_1026_1026 = Strassen().multiply(m1_1026_1026, m2_1026_1026)
 
-            m1_100_100000 = MatrixCreator.randomElementUniformMatrix(100, 100000, -1.0, 1.0)
-            m2_100000_100 = MatrixCreator.randomElementUniformMatrix(100000, 100, -1.0, 1.0)
-            m1_100_100000_x_m2_100000_100 = Strassen().multiply(m1_100_100000, m2_100000_100)
+//            m1_100_100000 = MatrixCreator.randomElementUniformMatrix(100, 100000, -1.0, 1.0)
+//            m2_100000_100 = MatrixCreator.randomElementUniformMatrix(100000, 100, -1.0, 1.0)
+//            m1_100_100000_x_m2_100000_100 = Strassen().multiply(m1_100_100000, m2_100000_100)
 
             
         
@@ -44,10 +44,10 @@ internal class MultiplicationTest {
 
 
 
-    @org.junit.jupiter.api.Test
-    fun dummyMultiplierTest1() {
-        assert(maxdiff(DummyMultiplier().multiply(m1_1026_1026, m2_1026_1026), m1_1026_1026_x_m2_1026_1026) < PRECISION)
-    }
+//    @org.junit.jupiter.api.Test
+//    fun dummyMultiplierTest1() {
+//        assert(maxdiff(DummyMultiplier().multiply(m1_1026_1026, m2_1026_1026), m1_1026_1026_x_m2_1026_1026) < PRECISION)
+//    }
     @org.junit.jupiter.api.Test
     fun dummyCacheFriendlyTest1() {
         assert(maxdiff(DummyCacheFriendly().multiply(m1_1026_1026, m2_1026_1026), m1_1026_1026_x_m2_1026_1026) < PRECISION)
