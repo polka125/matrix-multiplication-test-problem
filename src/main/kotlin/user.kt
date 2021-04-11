@@ -9,7 +9,7 @@ fun main() {
     println(mt2 * mt1)
     println(mt2 * mt1 * mt2)
 
-    // а теперь умножим что-нибудь большое
+    // а теперь умножим что-нибудь большоoе
 
 
 //    var mt3 = MatrixCreator.fromFlatArray(2, 4,
